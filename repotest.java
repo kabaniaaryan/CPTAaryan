@@ -10,7 +10,7 @@ public class repotest{
 		con.println("Give me a word");
 		strWord = con.readLine();
 		strLetter = strWord.substring(0,1);
-		con.println(strLetter);
+		con.println("The first letter is" +strLetter);
 		
 	}
 }
