@@ -22,7 +22,7 @@ public class CPTMethods{
 			}else if(intChoice == 4){
 				con.println("Quit");
 			}
-		}
+		} 
 	}
 	
 	public static void play(Console con){
