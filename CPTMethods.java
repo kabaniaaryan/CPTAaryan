@@ -21,7 +21,10 @@ public class CPTMethods{
 				CPTMethods.leaderboard(con);
 			}else if(intChoice == 4){
 				con.println("Quit");
+			}else{
+				con.println("Not an option");
 			}
+			
 		} 
 	}
 	
