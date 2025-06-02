@@ -32,11 +32,43 @@ public class CPTMethods{
 	}
 	
 	public static void leaderboard(Console con){
-		con.println("leaderboard");
+		TextInputFile leaderboardFile = new TextInputFile("leaderboard.txt");
+		
+		int intCount;
+		int intArrayNum;
+		String strTemp;
+		intArrayNum = 0;
+		intCount = 0;
+		
+		//number of lines in file
+		while(leaderboardFile.eof() == false){
+			strTemp = leaderboardFile.readLine();
+			intCount = intCount + 1;
+		}
+		intArrayNum = intCount/2;
+		leaderboardFile.close();
+		
+		//getting leaderboard data into array
+		leaderboardFile = new TextInputFile("leaderboard.txt");	
+		
+		String strLeaderboard[][];
+		strLeaderboard = new String[intArrayNum][2];
+		
+		int intCount2;
+		for(intCount2 = 0; intCount2 < intArrayNum; intCount2++){
+			strLeaderboard[intCount2][0] = leaderboardFile.readLine();
+			strLeaderboard[intCount2][1] = leaderboardFile.readLine();
+			con.println(strLeaderboard[intCount2][0]+" - "+strLeaderboard[intCount2][1]);
+		}
+		leaderboardFile.close();
+		
+		//bubble sorting leaderboard file
+		
+		
+			
 	}
 	
 	public static void addTheme(Console con){
 		con.println("add theme");
 	}	
->>>>>>> 8bae6f95bd5da0462d31d11bf2ebf5741330dd6e
 }
