@@ -13,14 +13,19 @@ public class CPTMethods{
 			intChoice = con.readInt();
 		
 			if(intChoice == 1){
+				con.clear();
 				CPTMethods.play(con);
 			}else if(intChoice == 2){
+				con.clear();
 				CPTMethods.leaderboard(con);
 			}else if(intChoice == 3){
-				CPTMethods.leaderboard(con);
+				con.clear();
+				CPTMethods.addTheme(con);
 			}else if(intChoice == 4){
+				con.clear();
 				con.println("Quit");
 			}else{
+				con.clear();
 				con.println("Not an option");
 			}
 			
@@ -58,7 +63,6 @@ public class CPTMethods{
 		for(intCount2 = 0; intCount2 < intArrayNum; intCount2++){
 			strLeaderboard[intCount2][0] = leaderboardFile.readLine();
 			strLeaderboard[intCount2][1] = leaderboardFile.readLine();
-			con.println(strLeaderboard[intCount2][0]+" - "+strLeaderboard[intCount2][1]);
 		}
 		leaderboardFile.close();
 		
@@ -83,13 +87,66 @@ public class CPTMethods{
 		}
 		//display leaderboard
 		int intCount4;
+		con.println("The top 5 are:");
 		for(intCount4 = 0; intCount4 < 5; intCount4++){
 			con.println((intCount4 + 1)+". "+strLeaderboard[intCount4][0] + " with "+ strLeaderboard[intCount4][1]+" words revealed");
-		}
+			
+			}
 		
+		//going back to main menu
+		String strRandom;
+		
+		con.println("Press any key to go back to the main menu");
+		strRandom = con.readLine();
+		if(strRandom != "lajsldkjfsdf"){
+			con.clear();
+		}
 	}
 	
 	public static void addTheme(Console con){
-		con.println("add theme");
+		//getting new theme name
+		String strNewTheme;
+		con.println("What is the name of the new theme?");
+		strNewTheme = con.readLine();
+		//adding file name to master file
+		TextOutputFile masterFile = new TextOutputFile("masterfile.txt", true);
+		masterFile.println(strNewTheme);
+		masterFile.close();
+		
+		//adding .txt to make the new theme it's own file
+		strNewTheme = strNewTheme.toLowerCase() +".txt";
+		
+		TextOutputFile addThemeFile = new TextOutputFile(strNewTheme);
+		
+		//adding words into new theme file
+		boolean blnLoop;
+		String strNewWord;
+		int intWordsAdded;
+		
+		blnLoop = true;
+		con.println("If you would like to stop then type 'stop'");
+		while(blnLoop == true){
+			con.println("Your new word is: ");
+			
+			strNewWord = con.readLine();
+			if(strNewWord.equalsIgnoreCase("stop")){
+				break;
+			}else if(strNewWord.length() < 4){
+				con.println("Try again, the word must have 4 or more characters");
+			}else{
+				addThemeFile.println(strNewWord);
+			}
+			
+		}
+		addThemeFile.close();
+		String strRandom;
+		
+		con.println("Press any key to go back to the main menu");
+		strRandom = con.readLine();
+		if(strRandom != "lajsldkjfsdf"){
+			con.clear();
+		}
+		
 	}	
+
 }
