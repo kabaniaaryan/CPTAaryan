@@ -62,10 +62,31 @@ public class CPTMethods{
 		}
 		leaderboardFile.close();
 		
-		//bubble sorting leaderboard file
+		//sorting leaderboard file
+		int intCount3;
+		int intCount5;
+		String strTempName;
+		String strTempScore;
+		for(intCount5 = 0; intCount5<intArrayNum; intCount5++){
+			for(intCount3 = 0; intCount3 < intCount2 - 1; intCount3++){
+				if(Integer.parseInt(strLeaderboard[intCount3][1]) < Integer.parseInt(strLeaderboard[intCount3 + 1][1])){
+					//swap name
+					strTempName = strLeaderboard[intCount3][0];
+					strLeaderboard[intCount3][0] = strLeaderboard[intCount3 + 1][0];
+					strLeaderboard[intCount3+1][0] = strTempName;
+					//swap nmumbers
+					strTempScore = strLeaderboard[intCount3][1];
+					strLeaderboard[intCount3][1] = strLeaderboard[intCount3 + 1][1];
+					strLeaderboard[intCount3+1][1] = strTempScore;
+				}
+			}	
+		}
+		//display leaderboard
+		int intCount4;
+		for(intCount4 = 0; intCount4 < 5; intCount4++){
+			con.println((intCount4 + 1)+". "+strLeaderboard[intCount4][0] + " with "+ strLeaderboard[intCount4][1]+" words revealed");
+		}
 		
-		
-			
 	}
 	
 	public static void addTheme(Console con){
