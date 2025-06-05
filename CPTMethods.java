@@ -36,7 +36,72 @@ public class CPTMethods{
 	}
 	
 	public static void play(Console con){
-		con.println("Play");
+		String strName;
+		con.println("What is your name?");
+		strName = con.readLine();
+		con.clear();
+		//find what theme the user wants
+		TextInputFile masterFile = new TextInputFile("masterfile.txt");
+		
+		//finding how many themes are in master file
+		String strThemes[];
+		String strTemp;
+		int intLinesInFile; 
+		intLinesInFile = 0;
+		
+		while(masterFile.eof() == false){
+			intLinesInFile = intLinesInFile + 1;
+			strTemp = masterFile.readLine();
+		}
+		masterFile.close();
+		
+		//getting all themes into array
+		masterFile = new TextInputFile("masterfile.txt");
+		strThemes = new String[intLinesInFile];
+		int intCount;
+		for(intCount = 0; intCount < intLinesInFile; intCount++){
+			strThemes[intCount] = masterFile.readLine();
+		
+		}		
+		masterFile.close();
+		//telling user all themes in array and letting them pick
+		int intCount2;
+		int intThemeChoice;
+		
+		con.println("Here are the available themes");
+		con.println("Plese choose the number to the left of the theme");
+		for(intCount2 = 0; intCount2 < intLinesInFile; intCount2++){
+			con.println((intCount2+1)+". "+strThemes[intCount2]);			
+		}
+		intThemeChoice = con.readInt();
+		String strThemeName;
+		intThemeChoice = intThemeChoice - 1;
+		
+		strThemeName = strThemes[intThemeChoice]+".txt";
+		con.clear();
+		
+		//opening chosen theme and finding how many lines are in file
+		TextInputFile chosenTheme = new TextInputFile(strThemeName);
+		int intThemeWordsNum;
+		intThemeWordsNum = 0;
+		
+		while(chosenTheme.eof() == false){
+			strTemp = chosenTheme.readLine();
+			intThemeWordsNum = intThemeWordsNum + 1;
+		}
+		chosenTheme.close();
+		
+		//getting all theme words into array
+		chosenTheme = new TextInputFile(strThemeName);
+		String strThemeWords[];
+		strThemeWords = new String[intThemeWordsNum];
+		
+		int intCount3;
+		for(intCount3 = 0; intCount3 < intThemeWordsNum; intCount3++){
+			strThemeWords[intCount3] = chosenTheme.readLine();
+		}
+		chosenTheme.close();
+			
 	}
 	
 	public static void leaderboard(Console con){
