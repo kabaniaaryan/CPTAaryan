@@ -1,4 +1,7 @@
 import arc.*;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.awt.Font;
 
 public class CPTMethods{
 	public static void mainMenu(Console con){
@@ -23,7 +26,7 @@ public class CPTMethods{
 				CPTMethods.addTheme(con);
 			}else if(intChoice == 4){
 				con.clear();
-				con.println("Quit");
+				break;
 			}else{
 				con.clear();
 				con.println("Not an option");
@@ -148,5 +151,12 @@ public class CPTMethods{
 		}
 		
 	}	
+	
+	public static void testColor(String strColorName){
+		strColorName = strColorName.toLowerCase();
+		if(strColorName == "red"){
+			//con.setDrawColor(Color.RED);
+		}
+	}
 
 }

@@ -1,0 +1,6 @@
+mouse
+mousepad
+wallet
+glasses
+caps
+headphones
