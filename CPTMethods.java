@@ -126,15 +126,32 @@ public class CPTMethods{
 				}					
 			}
 		}
-		
 		//actually playing the game
-		int intPoints;
-		intPoints = strThemeWords[0][0].length();
-		int intTest;
-		for(intTest = 0; intTest < intThemeWordsNum; intTest++){
-			con.println(strThemeWords[intTest][0]);
-			con.println(strThemeWords[intTest][1]);
+		int intGame;
+		boolean blnPlayAgain;
+		blnPlayAgain = true;
+		for(intGame = 0; intGame < intThemeWordsNum; intGame++){
+			int intLength;
+			intLength = strThemeWords[intGame][0].length();
+			con.println(strThemeWords[intGame][0]);
+			 
+			int intDashNum;
+			String strDash;
+			strDash = "";
+			for(intDashNum = 0; intDashNum < intLength; intDashNum++){
+				strDash = strDash +"_ ";
+			}
+			
+			char[] charLetters = strThemeWords[intGame][0].toCharArray();
+	
+			int intCharArray;
+			String strTempLetter;			
+			break;
 		}
+		
+		
+		
+		
 		
 		
 		
