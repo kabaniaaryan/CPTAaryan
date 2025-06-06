@@ -93,15 +93,61 @@ public class CPTMethods{
 		
 		//getting all theme words into array
 		chosenTheme = new TextInputFile(strThemeName);
-		String strThemeWords[];
-		strThemeWords = new String[intThemeWordsNum];
+		String strThemeWords[][];
+		strThemeWords = new String[intThemeWordsNum][2];
 		
 		int intCount3;
+		int intRandomNum;
 		for(intCount3 = 0; intCount3 < intThemeWordsNum; intCount3++){
-			strThemeWords[intCount3] = chosenTheme.readLine();
+			strThemeWords[intCount3][0] = chosenTheme.readLine();
+			intRandomNum = (int)(Math.random() * 100);
+			strThemeWords[intCount3][1] = Integer.toString(intRandomNum);
 		}
 		chosenTheme.close();
-			
+		con.clear();
+		
+		//bubble sorting the words in the chosen theme
+		int intCount4;
+		int intCount5;
+		String strTempName;
+		String strTempNum;
+		
+		for(intCount4 = 0; intCount4 < intThemeWordsNum; intCount4++){
+			for(intCount5 = 0; intCount5 < intThemeWordsNum - 1; intCount5++){
+				if(Integer.parseInt(strThemeWords[intCount5][1]) < Integer.parseInt(strThemeWords[intCount5 + 1][1])){
+					//swap name
+					strTempName = strThemeWords[intCount5][0];
+					strThemeWords[intCount5][0] = strThemeWords[intCount5+1][0];
+					strThemeWords[intCount5+1][0] = strTempName;
+					//swap random numbers
+					strTempNum = strThemeWords[intCount5][1];
+					strThemeWords[intCount5][1] = strThemeWords[intCount5+1][1];
+					strThemeWords[intCount5+1][1] = strTempNum;
+				}					
+			}
+		}
+		
+		//actually playing the game
+		int intPoints;
+		intPoints = strThemeWords[0][0].length();
+		int intTest;
+		for(intTest = 0; intTest < intThemeWordsNum; intTest++){
+			con.println(strThemeWords[intTest][0]);
+			con.println(strThemeWords[intTest][1]);
+		}
+		
+		
+		
+		
+		
+		//going back to main menu
+		String strRandom;
+		
+		con.println("Press any key to go back to the main menu");
+		strRandom = con.readLine();
+		if(strRandom != "SuperRandomNoOneWillEverGuessLalalalalasdfsdf"){
+			con.clear();
+		}	
 	}
 	
 	public static void leaderboard(Console con){
