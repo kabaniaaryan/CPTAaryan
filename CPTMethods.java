@@ -11,7 +11,8 @@ public class CPTMethods{
 			con.println("1. Play");
 			con.println("2. View Leaderboard");
 			con.println("3. Add Theme");
-			con.println("4. Exit");
+			con.println("4. Help");
+			con.println("5. Exit");
 			con.println("Choose a number that corresponds with the option");
 			intChoice = con.readInt();
 		
@@ -26,10 +27,15 @@ public class CPTMethods{
 				CPTMethods.addTheme(con);
 			}else if(intChoice == 4){
 				con.clear();
+				CPTMethods.help(con);
+			}else if(intChoice == 5){
+				con.clear();
 				break;
 			}else{
 				con.clear();
 				con.println("Not an option");
+				con.sleep(2000);
+				con.clear();
 			}
 			
 		} 
@@ -151,7 +157,6 @@ public class CPTMethods{
 		
 		//going back to main menu
 		String strRandom;
-		
 		con.println("Press any key to go back to the main menu");
 		strRandom = con.readLine();
 		if(strRandom != "SuperRandomNoOneWillEverGuessLalalalalasdfsdf"){
@@ -218,7 +223,6 @@ public class CPTMethods{
 		
 		//going back to main menu
 		String strRandom;
-		
 		con.println("Press any key to go back to the main menu");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
@@ -262,8 +266,9 @@ public class CPTMethods{
 			
 		}
 		addThemeFile.close();
-		String strRandom;
 		
+		//going back to main menu
+		String strRandom;
 		con.println("Press any key to go back to the main menu");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
@@ -272,10 +277,21 @@ public class CPTMethods{
 		
 	}	
 	
-	public static void testColor(String strColorName){
-		strColorName = strColorName.toLowerCase();
-		if(strColorName == "red"){
-			//con.setDrawColor(Color.RED);
+	public static void help(Console con){
+		con.println("Tip 1 - Read quickly you only have 15 seconds or else this disappears!");
+		con.println("Tip 2 - Try to guess the vowels first as they are most common!");
+		con.println("Tip 3 - Do NOT guess multiple letters at the same time, guess word by word.");
+		con.println("Tip 4 - Ensure you are confident in your guesses or else you will lose a point.");
+		
+		con.sleep(15000);
+		con.clear();
+		
+		//going back to main menu
+		String strRandom;
+		con.println("Press any key to go back to the main menu");
+		strRandom = con.readLine();
+		if(strRandom != "lajsldkjfsdf"){
+			con.clear();
 		}
 	}
 
