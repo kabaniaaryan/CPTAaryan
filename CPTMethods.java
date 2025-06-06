@@ -149,14 +149,6 @@ public class CPTMethods{
 			break;
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		//going back to main menu
 		String strRandom;
 		
