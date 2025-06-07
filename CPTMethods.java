@@ -132,36 +132,102 @@ public class CPTMethods{
 				}					
 			}
 		}
-		//actually playing the game
+		//playing the game - interacting with user (the main code)
 		int intGame;
 		boolean blnPlayAgain;
 		blnPlayAgain = true;
-		for(intGame = 0; intGame < intThemeWordsNum; intGame++){
-			int intLength;
-			intLength = strThemeWords[intGame][0].length();
-			con.println(strThemeWords[intGame][0]);
-			 
-			int intDashNum;
-			String strDash;
-			strDash = "";
-			for(intDashNum = 0; intDashNum < intLength; intDashNum++){
-				strDash = strDash +"_ ";
+		while(blnPlayAgain == true){
+			con.clear();
+			for(intGame = 0; intGame < intThemeWordsNum; intGame++){
+				//setting up format - how many dashes to put
+				int intLength;
+				intLength = strThemeWords[intGame][0].length();	
+				int intPoints;
+				intPoints = intLength;		
+				char charProgress[];
+				charProgress = new char[intLength];
+				int intDashNum;
+				con.print("                                ");
+				for(intDashNum = 0; intDashNum < intLength; intDashNum++){
+					charProgress[intDashNum] = '_';
+					con.print(charProgress[intDashNum]);
+				}
+				char[] charLetters = strThemeWords[intGame][0].toCharArray();
+				strThemeWords[intGame][0] = strThemeWords[intGame][0].toLowerCase();
+				//guessing the letters in the actual word
+				boolean blnWordGuessed;
+				blnWordGuessed = false;
+				while(blnWordGuessed == false && intPoints > 0){
+										
+					String strGuess;
+					con.println("");
+					con.println("Guess a letter");
+					strGuess = con.readLine();
+					strGuess = strGuess.toLowerCase();
+					
+					if(strGuess.length() != 1){
+						con.println("Only guess one letter");
+					}
+					
+					char charGuess;
+					charGuess = strGuess.toLowerCase().charAt(0);
+					
+					//checking to see if the letter guessed is correct
+					int intChecking;
+					boolean blnCorrect;
+					blnCorrect = false;
+					for(intChecking = 0; intChecking < intLength; intChecking++){
+						if(charLetters[intChecking] == charGuess){
+							charProgress[intChecking] = charGuess;
+							blnCorrect = true;
+							con.clear();
+							con.println("You guessed the correct letter");
+						}
+					}
+					
+					//if user guesses wrong
+					if(blnCorrect == false){
+						intPoints = intPoints - 1;
+						con.clear();
+						con.println("WRONG!!! You only have " +intPoints+ " more points left");
+					}
+					
+					//checking if word is guessed
+					if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
+						blnWordGuessed = true;
+						con.println("CONGRATULATIONS!!! You guessed the word: "+strThemeWords[intGame][0]+ " correctly!");
+					}else if(intPoints <= 0){
+						con.println("Sorry you lost, try again next time!");
+						blnWordGuessed = true;
+					}else{
+						continue;
+					}
+				}
+				//seeing if user wants to play again
+				con.clear();
+				String strOption;
+				con.println("Would you like to play again? Select 'p' to play again or any other key to exit");
+				strOption = con.readLine();
+				
+				if(strOption == "p"){
+					blnPlayAgain = true;
+					con.clear();
+				}else{
+					blnPlayAgain = false;
+					con.clear();
+				}	
 			}
-			
-			char[] charLetters = strThemeWords[intGame][0].toCharArray();
-	
-			int intCharArray;
-			String strTempLetter;			
-			break;
 		}
 		
 		//going back to main menu
+		con.clear();
 		String strRandom;
+		con.println("");
 		con.println("Press any key to go back to the main menu");
 		strRandom = con.readLine();
 		if(strRandom != "SuperRandomNoOneWillEverGuessLalalalalasdfsdf"){
 			con.clear();
-		}	
+		}
 	}
 	
 	public static void leaderboard(Console con){
