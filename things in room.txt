@@ -1,0 +1,4 @@
+mouse
+mousepad
+keyboard
+laptop

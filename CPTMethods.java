@@ -135,6 +135,8 @@ public class CPTMethods{
 		//playing the game - interacting with user (the main code)
 		int intGame;
 		boolean blnPlayAgain;
+		int intWordsGuessed;
+		intWordsGuessed = 0;
 		blnPlayAgain = true;
 		while(blnPlayAgain == true){
 			con.clear();
@@ -143,7 +145,13 @@ public class CPTMethods{
 				int intLength;
 				intLength = strThemeWords[intGame][0].length();	
 				int intPoints;
-				intPoints = intLength;		
+				intPoints = intLength;	
+				
+				//another 4+++ checklist, if user's name is 'statitan' they get double points
+				if(strName.equals("statitan")){
+					intPoints = intPoints * 2;
+				}
+				
 				char charProgress[];
 				charProgress = new char[intLength];
 				int intDashNum;
@@ -152,13 +160,12 @@ public class CPTMethods{
 					charProgress[intDashNum] = '_';
 					con.print(charProgress[intDashNum]);
 				}
-				char[] charLetters = strThemeWords[intGame][0].toCharArray();
 				strThemeWords[intGame][0] = strThemeWords[intGame][0].toLowerCase();
+				char[] charLetters = strThemeWords[intGame][0].toCharArray();
 				//guessing the letters in the actual word
 				boolean blnWordGuessed;
 				blnWordGuessed = false;
-				while(blnWordGuessed == false && intPoints > 0){
-										
+				while(blnWordGuessed == false && intPoints > 0){					
 					String strGuess;
 					con.println("");
 					con.println("Guess a letter");
@@ -178,10 +185,11 @@ public class CPTMethods{
 					blnCorrect = false;
 					for(intChecking = 0; intChecking < intLength; intChecking++){
 						if(charLetters[intChecking] == charGuess){
+							con.clear();
 							charProgress[intChecking] = charGuess;
 							blnCorrect = true;
-							con.clear();
 							con.println("You guessed the correct letter");
+							intWordsGuessed = intWordsGuessed + 1;
 						}
 					}
 					
@@ -189,16 +197,27 @@ public class CPTMethods{
 					if(blnCorrect == false){
 						intPoints = intPoints - 1;
 						con.clear();
-						con.println("WRONG!!! You only have " +intPoints+ " more points left");
+						con.print("WRONG!!! You only have " +intPoints+ " more points left");
+					}
+					
+					//printing users progress
+					con.println("Here is your progress:");
+					int intUserProgress;
+					for(intUserProgress = 0; intUserProgress < intLength; intUserProgress++){
+						con.print(charProgress[intUserProgress]);
 					}
 					
 					//checking if word is guessed
 					if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
 						blnWordGuessed = true;
+						con.clear();
 						con.println("CONGRATULATIONS!!! You guessed the word: "+strThemeWords[intGame][0]+ " correctly!");
+						con.sleep(5000);
 					}else if(intPoints <= 0){
+						con.clear();
 						con.println("Sorry you lost, try again next time!");
 						blnWordGuessed = true;
+						con.sleep(5000);
 					}else{
 						continue;
 					}
@@ -206,17 +225,24 @@ public class CPTMethods{
 				//seeing if user wants to play again
 				con.clear();
 				String strOption;
-				con.println("Would you like to play again? Select 'p' to play again or any other key to exit");
+				con.print("Would you like to play again? Select 'p' to play again or any other key to go to main menu");
 				strOption = con.readLine();
 				
-				if(strOption == "p"){
+				if(strOption.equals("p")){
 					blnPlayAgain = true;
 					con.clear();
 				}else{
 					blnPlayAgain = false;
 					con.clear();
+					break;
 				}	
 			}
+		//adding name and words guessed to the leaderboard
+		TextOutputFile leaderboard = new TextOutputFile("leaderboard.txt", true);
+		leaderboard.println(strName);
+		leaderboard.println(intWordsGuessed);
+		leaderboard.close();
+		
 		}
 		
 		//going back to main menu
