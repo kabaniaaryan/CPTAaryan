@@ -5,38 +5,61 @@ import java.awt.Font;
 
 public class CPTMethods{
 	public static void mainMenu(Console con){
-		int intChoice;
+		char chrChoice;
+		int intTemp;
+		intTemp = 2;
 		while(true){
-			con.println("Guess The Word");
-			con.println("1. Play");
-			con.println("2. View Leaderboard");
-			con.println("3. Add Theme");
-			con.println("4. Help");
-			con.println("5. Exit");
-			con.println("Choose a number that corresponds with the option");
-			intChoice = con.readInt();
+			con.setDrawColor(new Color(3, 100, 230));
+			con.fillRoundRect(350, 25, 300, 100, 350, 0);
+			con.fillRoundRect(350, 150, 300, 300, 350, 0);
+			con.println("\n");
+			con.println("                                     Welcome to");
+			con.println("                                   GUESS THE WORD");
+			con.println("\n \n \n");
+			con.println("                                  1.    (P)lay");
+			con.println("");
+			con.println("                                  2. (L)eaderboard");
+			con.println("");
+			con.println("                                  3.   (T)heme");
+			con.println("");
+			con.println("                                  4.   (H)elp");
+			con.println("");
+			con.println("                                  5.   (E)xit");
+			con.println("\n \n ");
+			con.println("                Select the first letter that corresponds with your option");
+			chrChoice  = Character.toLowerCase(con.getChar());
+			con.clear();
 		
-			if(intChoice == 1){
+			con.setDrawColor(Color.black); // or whatever your background color is
+			con.fillRect(0, 0, 1280, 720);
+			if(chrChoice == 'p'){
 				con.clear();
 				CPTMethods.play(con);
-			}else if(intChoice == 2){
+			}else if(chrChoice == 'l'){
 				con.clear();
 				CPTMethods.leaderboard(con);
-			}else if(intChoice == 3){
+			}else if(chrChoice == 't'){
 				con.clear();
 				CPTMethods.addTheme(con);
-			}else if(intChoice == 4){
+			}else if(chrChoice == 'h'){
 				con.clear();
 				CPTMethods.help(con);
-			}else if(intChoice == 5){
+			}else if(chrChoice == 'e'){
 				con.clear();
 				break;
+			}else if(chrChoice == 's'){
+				con.clear();
+				CPTMethods.secretMenu(con);
 			}else{
 				con.clear();
-				con.println("Not an option");
+				con.println("                                    Not an option");
 				con.sleep(2000);
 				con.clear();
+				con.setDrawColor(new Color(3, 100, 230));
+				con.fillRoundRect(350, 25, 300, 100, 350, 0);
+				con.fillRoundRect(350, 150, 300, 300, 350, 0);
 			}
+			
 			
 		} 
 	}
@@ -386,5 +409,27 @@ public class CPTMethods{
 			con.clear();
 		}
 	}
+	
+	public static void secretMenu(Console con){
+		//printing funny joke
+		con.println("Ready for a funny joke?");
+		con.sleep(2000);
+		con.clear();
+		con.println("What did one snowman say to the other snowman?");
+		con.sleep(5000);
+		con.clear();
+		con.println("It smells like carrots !!!!!");
+		con.sleep(5000);
+		con.clear();
+		
+		//going back to main menu
+		String strRandom;
+		con.println("Press any key to go back to the main menu");
+		strRandom = con.readLine();
+		if(strRandom != "lajsldkjfsdf"){
+			con.clear();
+		}
+	}
+		
 
 }
