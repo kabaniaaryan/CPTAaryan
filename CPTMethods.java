@@ -259,11 +259,11 @@ public class CPTMethods{
 					if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
 						blnWordGuessed = true;
 						con.clear();
-						con.println("          CONGRATULATIONS!!! You guessed the word: "+strThemeWords[intGame][0]+ " correctly!");
+						con.println("          CONGRATULATIONS!!! You Guessed The Word: "+strThemeWords[intGame][0]+ " Correctly!");
 						con.sleep(5000);
 					}else if(intPoints <= 0){
 						con.clear();
-						con.println("                      Sorry you lost, try again next time!");
+						con.println("                      Sorry You Lost, Try Again Next Time!");
 						blnWordGuessed = true;
 						con.sleep(5000);
 					}else{
@@ -273,7 +273,7 @@ public class CPTMethods{
 				//seeing if user wants to play again
 				con.clear();
 				String strOption;
-				con.println("                        Would you like to play again? \n          Select 'p' to play again or any other key to go to main menu");
+				con.println("                        Would You Like To Play Again? \n               Select 'P' To Play Again Or Enter To Go To Main Menu");
 				con.println("\n \n \n \n \n");
 				con.print("                                      ");
 				strOption = con.readLine();
@@ -284,7 +284,7 @@ public class CPTMethods{
 				}else{
 					blnPlayAgain = false;
 					con.clear();
-					break;
+					CPTMethods.mainMenu(con);
 				}	
 			}
 		//adding name and words guessed to the leaderboard
@@ -293,16 +293,6 @@ public class CPTMethods{
 		leaderboard.println(intWordsGuessed);
 		leaderboard.close();
 		
-		}
-		
-		//going back to main menu
-		con.clear();
-		String strRandom;
-		con.println("");
-		con.println("Press any key to go back to the main menu");
-		strRandom = con.readLine();
-		if(strRandom != "SuperRandomNoOneWillEverGuessLalalalalasdfsdf"){
-			con.clear();
 		}
 	}
 	
@@ -357,15 +347,20 @@ public class CPTMethods{
 		}
 		//display leaderboard
 		int intCount4;
-		con.println("The top 5 are:");
-		for(intCount4 = 0; intCount4 < 5; intCount4++){
-			con.println((intCount4 + 1)+". "+strLeaderboard[intCount4][0] + " with "+ strLeaderboard[intCount4][1]+" words revealed");
-			
+		con.println("                                The Top 5 Are:");
+		for(intCount4 = 0; intCount4 < intArrayNum; intCount4++){
+			con.println("\n                       "+(intCount4 + 1)+". "+strLeaderboard[intCount4][0] + " With "+ strLeaderboard[intCount4][1]+" Words Revealed");
+			if(intCount4 == 4){
+				break;
 			}
+		}
 		
 		//going back to main menu
+		con.sleep(2000);
+		con.clear();
 		String strRandom;
-		con.println("Press any key to go back to the main menu");
+		con.println("                     Press Enter To Go Back To The Main Menu");
+		con.print("                                        ");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
 			con.clear();
@@ -411,12 +406,12 @@ public class CPTMethods{
 		
 		//going back to main menu
 		String strRandom;
-		con.println("Press any key to go back to the main menu");
+		con.println("                     Press Enter To Go Back To The Main Menu");
+		con.print("                                        ");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
 			con.clear();
 		}
-		
 	}	
 	
 	public static void help(Console con){
@@ -430,7 +425,8 @@ public class CPTMethods{
 		
 		//going back to main menu
 		String strRandom;
-		con.println("Press any key to go back to the main menu");
+		con.println("                     Press Enter To Go Back To The Main Menu");
+		con.print("                                        ");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
 			con.clear();
@@ -451,7 +447,8 @@ public class CPTMethods{
 		
 		//going back to main menu
 		String strRandom;
-		con.println("Press any key to go back to the main menu");
+		con.println("                     Press Enter To Go Back To The Main Menu");
+		con.print("                                        ");
 		strRandom = con.readLine();
 		if(strRandom != "lajsldkjfsdf"){
 			con.clear();
