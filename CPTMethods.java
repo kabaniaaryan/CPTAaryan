@@ -29,9 +29,12 @@ public class CPTMethods{
 			con.println("                Select the first letter that corresponds with your option");
 			chrChoice  = Character.toLowerCase(con.getChar());
 			con.clear();
-		
-			con.setDrawColor(Color.black); // or whatever your background color is
+			
+			//setting background back to black
+			con.setDrawColor(Color.black); 
 			con.fillRect(0, 0, 1280, 720);
+			
+			//user choosing their choice
 			if(chrChoice == 'p'){
 				con.clear();
 				CPTMethods.play(con);
@@ -66,7 +69,13 @@ public class CPTMethods{
 	
 	public static void play(Console con){
 		String strName;
-		con.println("What is your name?");
+		//asking user for name
+		con.setDrawColor(new Color(3, 100, 230));
+		con.fillRoundRect(340, 75, 325, 200, 350, 0);
+		con.println("\n \n \n \n");
+		con.println("                                 WHAT IS YOUR NAME?");
+		con.println("\n");
+		con.print("                                      ");
 		strName = con.readLine();
 		con.clear();
 		//find what theme the user wants
@@ -77,6 +86,10 @@ public class CPTMethods{
 		String strTemp;
 		int intLinesInFile; 
 		intLinesInFile = 0;
+		
+		//setting background back to black
+		con.setDrawColor(Color.black); 
+		con.fillRect(0, 0, 1280, 720);
 		
 		while(masterFile.eof() == false){
 			intLinesInFile = intLinesInFile + 1;
@@ -94,20 +107,28 @@ public class CPTMethods{
 		}		
 		masterFile.close();
 		//telling user all themes in array and letting them pick
+		con.setDrawColor(new Color(3, 100, 230));
+		con.fillRoundRect(340, 75, 325, 400, 350, 0);
 		int intCount2;
 		int intThemeChoice;
 		
-		con.println("Here are the available themes");
-		con.println("Plese choose the number to the left of the theme");
+		con.println("                           Here Are The Available Themes");
+		con.println("                   Plese Choose The Number To The Left Of The Theme");
+		con.println("\n \n \n");
 		for(intCount2 = 0; intCount2 < intLinesInFile; intCount2++){
-			con.println((intCount2+1)+". "+strThemes[intCount2]);			
+			con.println("                                   "+(intCount2+1)+". "+strThemes[intCount2]);			
 		}
+		con.print("\n \n \n \n \n \n \n \n \n \n \n \n                                         ");
 		intThemeChoice = con.readInt();
 		String strThemeName;
 		intThemeChoice = intThemeChoice - 1;
 		
 		strThemeName = strThemes[intThemeChoice]+".txt";
 		con.clear();
+		
+		//setting background back to black
+		con.setDrawColor(Color.black); 
+		con.fillRect(0, 0, 1280, 720);
 		
 		//opening chosen theme and finding how many lines are in file
 		TextInputFile chosenTheme = new TextInputFile(strThemeName);
@@ -178,20 +199,22 @@ public class CPTMethods{
 				char charProgress[];
 				charProgress = new char[intLength];
 				int intDashNum;
-				con.print("                                ");
+				con.print("                                  ");
 				for(intDashNum = 0; intDashNum < intLength; intDashNum++){
 					charProgress[intDashNum] = '_';
 					con.print(charProgress[intDashNum]);
 				}
 				strThemeWords[intGame][0] = strThemeWords[intGame][0].toLowerCase();
 				char[] charLetters = strThemeWords[intGame][0].toCharArray();
+				
 				//guessing the letters in the actual word
 				boolean blnWordGuessed;
 				blnWordGuessed = false;
 				while(blnWordGuessed == false && intPoints > 0){					
 					String strGuess;
 					con.println("");
-					con.println("Guess a letter");
+					con.println("\n \n \n \n \n                                Guess A Letter");
+					con.print("                                      ");
 					strGuess = con.readLine();
 					strGuess = strGuess.toLowerCase();
 					
@@ -211,7 +234,7 @@ public class CPTMethods{
 							con.clear();
 							charProgress[intChecking] = charGuess;
 							blnCorrect = true;
-							con.println("You guessed the correct letter");
+							con.println("                        You Guessed The Correct Letter");
 							intWordsGuessed = intWordsGuessed + 1;
 						}
 					}
@@ -220,11 +243,13 @@ public class CPTMethods{
 					if(blnCorrect == false){
 						intPoints = intPoints - 1;
 						con.clear();
-						con.print("WRONG!!! You only have " +intPoints+ " more points left");
+						con.print("                   WRONG!!! You Only Have " +intPoints+ " More Points Left");
+						con.println("                             Here Is Your Progress:");
 					}
 					
 					//printing users progress
-					con.println("Here is your progress:");
+					con.println("                             Here Is Your Progress:");
+					con.print("                                   ");
 					int intUserProgress;
 					for(intUserProgress = 0; intUserProgress < intLength; intUserProgress++){
 						con.print(charProgress[intUserProgress]);
@@ -234,11 +259,11 @@ public class CPTMethods{
 					if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
 						blnWordGuessed = true;
 						con.clear();
-						con.println("CONGRATULATIONS!!! You guessed the word: "+strThemeWords[intGame][0]+ " correctly!");
+						con.println("          CONGRATULATIONS!!! You guessed the word: "+strThemeWords[intGame][0]+ " correctly!");
 						con.sleep(5000);
 					}else if(intPoints <= 0){
 						con.clear();
-						con.println("Sorry you lost, try again next time!");
+						con.println("                      Sorry you lost, try again next time!");
 						blnWordGuessed = true;
 						con.sleep(5000);
 					}else{
@@ -248,7 +273,9 @@ public class CPTMethods{
 				//seeing if user wants to play again
 				con.clear();
 				String strOption;
-				con.print("Would you like to play again? Select 'p' to play again or any other key to go to main menu");
+				con.println("                        Would you like to play again? \n          Select 'p' to play again or any other key to go to main menu");
+				con.println("\n \n \n \n \n");
+				con.print("                                      ");
 				strOption = con.readLine();
 				
 				if(strOption.equals("p")){
