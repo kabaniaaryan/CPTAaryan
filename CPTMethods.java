@@ -108,7 +108,7 @@ public class CPTMethods{
 		masterFile.close();
 		//telling user all themes in array and letting them pick
 		con.setDrawColor(new Color(3, 100, 230));
-		con.fillRoundRect(340, 75, 325, 400, 350, 0);
+		con.fillRoundRect(340, 75, 325, 600, 350, 0);
 		int intCount2;
 		int intThemeChoice;
 		
@@ -118,7 +118,7 @@ public class CPTMethods{
 		for(intCount2 = 0; intCount2 < intLinesInFile; intCount2++){
 			con.println("                                   "+(intCount2+1)+". "+strThemes[intCount2]);			
 		}
-		con.print("\n \n \n \n \n \n \n \n \n \n \n \n                                         ");
+		con.print("\n                                         ");
 		intThemeChoice = con.readInt();
 		String strThemeName;
 		intThemeChoice = intThemeChoice - 1;
@@ -218,56 +218,66 @@ public class CPTMethods{
 					strGuess = con.readLine();
 					strGuess = strGuess.toLowerCase();
 					
+					//checking to see if user guessed one letter
+					boolean blnOneLetter;
+					blnOneLetter = true;
 					if(strGuess.length() != 1){
-						con.println("Only guess one letter");
+						con.clear();
+						con.println("\n \n \n \n \n                             Only guess one letter");
+						con.sleep(2000);
+						con.clear();
+						blnOneLetter = false;
 					}
 					
-					char charGuess;
-					charGuess = strGuess.toLowerCase().charAt(0);
-					
-					//checking to see if the letter guessed is correct
-					int intChecking;
-					boolean blnCorrect;
-					blnCorrect = false;
-					for(intChecking = 0; intChecking < intLength; intChecking++){
-						if(charLetters[intChecking] == charGuess){
-							con.clear();
-							charProgress[intChecking] = charGuess;
-							blnCorrect = true;
-							con.println("                        You Guessed The Correct Letter");
-							intWordsGuessed = intWordsGuessed + 1;
+					if(blnOneLetter == true){
+						char charGuess;
+						charGuess = strGuess.toLowerCase().charAt(0);
+						
+						//checking to see if the letter guessed is correct
+						int intChecking;
+						boolean blnCorrect;
+						blnCorrect = false;
+						for(intChecking = 0; intChecking < intLength; intChecking++){
+							if(charLetters[intChecking] == charGuess){
+								con.clear();
+								charProgress[intChecking] = charGuess;
+								blnCorrect = true;
+								con.println("                        You Guessed The Correct Letter");
+								intWordsGuessed = intWordsGuessed + 1;
+							}
 						}
-					}
 					
-					//if user guesses wrong
-					if(blnCorrect == false){
-						intPoints = intPoints - 1;
-						con.clear();
-						con.print("                   WRONG!!! You Only Have " +intPoints+ " More Points Left");
+						
+						//if user guesses wrong
+						if(blnCorrect == false){
+							intPoints = intPoints - 1;
+							con.clear();
+							con.print("                   WRONG!!! You Only Have " +intPoints+ " More Points Left");
+							con.println("                             Here Is Your Progress:");
+						}
+						
+						//printing users progress
 						con.println("                             Here Is Your Progress:");
-					}
-					
-					//printing users progress
-					con.println("                             Here Is Your Progress:");
-					con.print("                                   ");
-					int intUserProgress;
-					for(intUserProgress = 0; intUserProgress < intLength; intUserProgress++){
-						con.print(charProgress[intUserProgress]);
-					}
-					
-					//checking if word is guessed
-					if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
-						blnWordGuessed = true;
-						con.clear();
-						con.println("          CONGRATULATIONS!!! You Guessed The Word: "+strThemeWords[intGame][0]+ " Correctly!");
-						con.sleep(5000);
-					}else if(intPoints <= 0){
-						con.clear();
-						con.println("                      Sorry You Lost, Try Again Next Time!");
-						blnWordGuessed = true;
-						con.sleep(5000);
-					}else{
-						continue;
+						con.print("                                   ");
+						int intUserProgress;
+						for(intUserProgress = 0; intUserProgress < intLength; intUserProgress++){
+							con.print(charProgress[intUserProgress]);
+						}
+						
+						//checking if word is guessed
+						if(String.valueOf(charProgress).equals(strThemeWords[intGame][0])){
+							blnWordGuessed = true;
+							con.clear();
+							con.println("          CONGRATULATIONS!!! You Guessed The Word: "+strThemeWords[intGame][0]+ " Correctly!");
+							con.sleep(5000);
+						}else if(intPoints <= 0){
+							con.clear();
+							con.println("                      Sorry You Lost, Try Again Next Time!");
+							blnWordGuessed = true;
+							con.sleep(5000);
+						}else{
+							continue;
+						}
 					}
 				}
 				//seeing if user wants to play again
@@ -284,14 +294,15 @@ public class CPTMethods{
 				}else{
 					blnPlayAgain = false;
 					con.clear();
-					CPTMethods.mainMenu(con);
-				}	
+					break;
+				}
 			}
 		//adding name and words guessed to the leaderboard
 		TextOutputFile leaderboard = new TextOutputFile("leaderboard.txt", true);
 		leaderboard.println(strName);
 		leaderboard.println(intWordsGuessed);
 		leaderboard.close();
+		CPTMethods.mainMenu(con);
 		
 		}
 	}
@@ -356,7 +367,7 @@ public class CPTMethods{
 		}
 		
 		//going back to main menu
-		con.sleep(2000);
+		con.sleep(4000);
 		con.clear();
 		String strRandom;
 		con.println("                     Press Enter To Go Back To The Main Menu");
@@ -370,8 +381,10 @@ public class CPTMethods{
 	public static void addTheme(Console con){
 		//getting new theme name
 		String strNewTheme;
-		con.println("What is the name of the new theme?");
+		con.println("                         What is the name of the new theme?");
+		con.print("                                   ");
 		strNewTheme = con.readLine();
+		con.clear();
 		//adding file name to master file
 		TextOutputFile masterFile = new TextOutputFile("masterfile.txt", true);
 		masterFile.println(strNewTheme);
@@ -388,23 +401,27 @@ public class CPTMethods{
 		int intWordsAdded;
 		
 		blnLoop = true;
-		con.println("If you would like to stop then type 'stop'");
 		while(blnLoop == true){
-			con.println("Your new word is: ");
-			
+			con.println("                     If you would like to stop then type 'stop'");
+			con.println("                               Your new word is: ");
+			con.print("                                   ");
 			strNewWord = con.readLine();
 			if(strNewWord.equalsIgnoreCase("stop")){
 				break;
 			}else if(strNewWord.length() < 4){
-				con.println("Try again, the word must have 4 or more characters");
+				con.clear();
+				con.println("               Try again, the word must have 4 or more characters");
+				con.sleep(2000);
 			}else{
 				addThemeFile.println(strNewWord);
 			}
-			
+			con.clear();
+			con.sleep(500);
 		}
 		addThemeFile.close();
 		
 		//going back to main menu
+		con.clear();
 		String strRandom;
 		con.println("                     Press Enter To Go Back To The Main Menu");
 		con.print("                                        ");
