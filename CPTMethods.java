@@ -112,20 +112,63 @@ public class CPTMethods{
 		
 		}		
 		masterFile.close();
-		//telling user all themes in array and letting them pick
-		con.setDrawColor(new Color(3, 100, 230));
-		con.fillRoundRect(340, 75, 325, 600, 350, 0);
-		int intCount2;
-		int intThemeChoice;
 		
-		con.println("                           Here Are The Available Themes");
-		con.println("                   Plese Choose The Number To The Left Of The Theme");
-		con.println("\n \n \n");
-		for(intCount2 = 0; intCount2 < intLinesInFile; intCount2++){
-			con.println("                                   "+(intCount2+1)+". "+strThemes[intCount2]);			
+		//making sure user selects correct option
+		String strThemeChoice;
+		int intThemeChoice = 0;
+		boolean blnisValid;
+		blnisValid = false;
+
+		while (blnisValid == false) {
+			con.setDrawColor(new Color(3, 100, 230));
+			con.fillRoundRect(340, 75, 325, 600, 350, 0);
+			con.clear();
+
+			con.println("                           Here Are The Available Themes");
+			con.println("                   Please Choose The Number To The Left Of The Theme");
+			con.println("\n \n \n");
+			
+			int intCount2;
+			for (intCount2 = 0; intCount2 < intLinesInFile; intCount2++) {
+				con.println("                                   " + (intCount2 + 1) + ". " + strThemes[intCount2]);			
+			}
+
+			con.print("\n                                         ");
+			strThemeChoice = con.readLine();
+
+			//check to see if user choice is a number
+			boolean blnisNumeric;
+			blnisNumeric = true;
+			int intTrue;
+			for (intTrue = 0; intTrue < strThemeChoice.length(); intTrue++) {
+				if (!Character.isDigit(strThemeChoice.charAt(intTrue))) {
+					blnisNumeric = false;
+					break;
+				}
+			}
+
+			if(blnisNumeric && !strThemeChoice.equals("")){
+				intThemeChoice = Integer.parseInt(strThemeChoice);
+
+				if(intThemeChoice >= 1 && intThemeChoice <= intLinesInFile) {
+					blnisValid = true;
+				}else{
+					con.setDrawColor(Color.black); 
+					con.fillRect(0, 0, 1280, 720);
+					con.clear();
+					con.println("\n \n \n \n                             Not an option. Try again!");
+					con.sleep(2000);
+				}
+			}else{
+				con.setDrawColor(Color.black); 
+				con.fillRect(0, 0, 1280, 720);
+				con.clear();
+				con.println("\n \n \n \n                             Invalid input. Numbers only!");
+				con.sleep(2000);
+			}
 		}
-		con.print("\n                                         ");
-		intThemeChoice = con.readInt();
+		
+		//getting theme name into txt file
 		String strThemeName;
 		intThemeChoice = intThemeChoice - 1;
 		
