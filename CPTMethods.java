@@ -54,6 +54,7 @@ public class CPTMethods{
 				CPTMethods.help(con);
 			}else if(chrChoice == 'e'){
 				con.clear();
+				con.closeConsole();
 				break;
 			}else if(chrChoice == 's'){
 				con.clear();
@@ -476,6 +477,4 @@ public class CPTMethods{
 			con.clear();
 		}
 	}
-		
-
 }
