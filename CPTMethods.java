@@ -1,3 +1,8 @@
+//Aaryan Karim Kabani
+//CPTMethods.java
+//June 12, 2025
+//Version 2.3
+
 import arc.*;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
